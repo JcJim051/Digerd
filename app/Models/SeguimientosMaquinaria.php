@@ -28,10 +28,6 @@ class SeguimientosMaquinaria extends Model
 	protected $primaryKey = 'id_seguimientos_maquinaria';
 	public $timestamps = false;
 
-	protected $casts = [
-		'id_maquinaria' => 'int',
-		'horas' => 'int'
-	];
 
 	protected $dates = [
 		'fecha'

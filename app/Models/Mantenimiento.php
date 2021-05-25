@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Mantenimiento
- * 
+ *
  * @property int $id_mantenimiento
  * @property int|null $id_maquinaria
  * @property Carbon|null $fecha
  * @property float|null $costo
- * 
+ *
  * @property Maquinarium $maquinarium
  *
  * @package App\Models
@@ -26,11 +26,6 @@ class Mantenimiento extends Model
 	protected $table = 'mantenimientos';
 	protected $primaryKey = 'id_mantenimiento';
 	public $timestamps = false;
-
-	protected $casts = [
-		'id_maquinaria' => 'int',
-		'costo' => 'float'
-	];
 
 	protected $dates = [
 		'fecha'
@@ -42,8 +37,8 @@ class Mantenimiento extends Model
 		'costo'
 	];
 
-	public function maquinarium()
+	public function maquinaria()
 	{
-		return $this->belongsTo(Maquinarium::class, 'id_mantenimiento');
+		return $this->belongsTo(Maquinaria::class, 'id_mantenimiento');
 	}
 }
