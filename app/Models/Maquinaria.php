@@ -31,14 +31,6 @@ class Maquinaria extends Model
 	protected $primaryKey = 'id_maquinaria';
 	public $timestamps = false;
 
-	protected $casts = [
-		'marca' => 'character varying',
-		'capacidad' => 'character varying',
-		'presupuesto' => 'character varying',
-		'ubicacion' => 'character varying',
-		'descripcion' => 'character varying',
-		'activa' => 'int'
-	];
 
 	protected $fillable = [
 		'marca',
