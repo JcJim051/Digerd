@@ -50,9 +50,9 @@
 <script src="{{route('heatmap')}}"></script>
 
 <script>
-    var map = L.map('map').setView([-37.87, 175.475], 12);
+    var map = L.map('map').setView([-4.1415692,-73.6493001], 12);
 
-    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    var tiles = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
     addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
