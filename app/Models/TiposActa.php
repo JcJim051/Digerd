@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class TiposActum
  *
+ * 
  * @property int $id_tipo_acta
  * @property character varying|null $descripcion
  *
