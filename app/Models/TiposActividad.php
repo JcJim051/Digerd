@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TiposActividad
- * 
+ *
  * @property int $id_tipo_actividad
  * @property character varying|null $descripcion
  * @property int|null $finaliza
- * 
+ *
  * @property Collection|AccionesAdelantada[] $acciones_adelantadas
  *
  * @package App\Models
@@ -26,10 +26,6 @@ class TiposActividad extends Model
 	protected $primaryKey = 'id_tipo_actividad';
 	public $timestamps = false;
 
-	protected $casts = [
-		'descripcion' => 'character varying',
-		'finaliza' => 'int'
-	];
 
 	protected $fillable = [
 		'descripcion',
