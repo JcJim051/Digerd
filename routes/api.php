@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post("/login",'App\Http\Controllers\ApiAuthController@login')->name('apilogin');
+Route::get("/municipios",'App\Http\Controllers\ApiController@municipios')->name('apimunicipios');
