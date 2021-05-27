@@ -16,6 +16,7 @@ $keys = $customs[0]->getFillable();
         @endforeach
     </tr>
     @foreach($customs as $custom)
+    
     <tr>
         @foreach($keys as $key)
         <td>{{$custom->$key}}</td>

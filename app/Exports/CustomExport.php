@@ -13,7 +13,7 @@ class CustomExport implements FromView, WithDrawings
 {   
     public function __construct($model,$customImage)
     {
-        $this->customModel =  'App\\' . $model;
+        $this->customModel =  $model;
         $this->customImage =  $customImage;
     }
     /**
