@@ -27,8 +27,8 @@
                 <input type="checkbox" @if ($showSoftDeleted) checked @endif id="show_soft_deletes" data-toggle="toggle" data-on="{{ __('voyager::bread.soft_deletes_off') }}" data-off="{{ __('voyager::bread.soft_deletes_on') }}">
             @endif
         @endcan
-        
-        <a target="_blank" href="{{ route('exportxlsx',$dataType->display_name_singular) }}" class="btn btn-primary btn-add-new"
+      
+        <a target="_blank" href="{{ route('exportxlsx',$dataType->id) }}" class="btn btn-primary btn-add-new"
         style="background-color: #0000cc">
                     <i class="fa fa-file-excel-o"></i> <span>Exportar</span>
                 </a>
