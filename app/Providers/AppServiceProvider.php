@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use TCG\Voyager\Facades\Voyager;
+use App\LocationFormField;
+use App\ListSelectFormField;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Voyager::addFormField(LocationFormField::class);
+        Voyager::addFormField(ListSelectFormField::class);
     }
 
     /**

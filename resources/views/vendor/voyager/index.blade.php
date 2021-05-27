@@ -7,6 +7,9 @@
     #map {
         height: 800px;
     }
+    #map2 {
+        height: 800px;
+    }
 </style>
 
 
@@ -24,9 +27,11 @@
         <div id="exTab2" >
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <a href="#1" data-toggle="tab">Mapa de Calor</a>
+                    <a href="#1" data-toggle="tab">Emergencias</a>
                 </li>
-                <li><a href="#2" data-toggle="tab">Emergencias</a>
+                <li><a href="#2" data-toggle="tab">Mapa de Calor</a>
+                </li>
+                <li><a href="{{route('voyager.actividades.index')}}" >Actividades <font color="#cc0000">({{$count}})</font> </a>
                 </li>
             </ul>
             <div class="tab-content ">
@@ -34,6 +39,8 @@
                     <div id="map"></div>
                 </div>
             <div class="tab-pane" id="2">
+            <div class="tab-pane active" id="2">
+                </div>
 
             </div>
         </div>
@@ -59,5 +66,6 @@
     addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
     
     var heat = L.heatLayer(addressPoints).addTo(map);
+ 
 </script>
 @stop
