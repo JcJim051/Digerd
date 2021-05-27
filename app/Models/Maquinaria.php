@@ -50,4 +50,8 @@ class Maquinaria extends Model
 	{
 		return $this->hasMany(SeguimientosMaquinaria::class, 'id_maquinaria');
 	}
+	public function getInfoAttribute()
+	{
+		return $this->descripcion . ":{$this->placa}[{$this->serial}]";
+	}
 }

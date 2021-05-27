@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Actividad;
 class DashboardController extends Controller
 {
     //
     public function index()
     {
+      $actividades=Actividad::where("id_funcionario","=",auth()->user()->id_funcionario)->get();  
+      $count=count($actividades);
         
-      return view("vendor.voyager.index");
+      return view("vendor.voyager.index",compact('count'));
     }
     public function map()
     {

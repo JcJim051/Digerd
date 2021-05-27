@@ -58,4 +58,8 @@ class Actividad extends Model
 	{
 		return $this->belongsTo(Funcionario::class, 'id_funcionario');
 	}
+	public function obligacion()
+	{
+		return $this->belongsTo(Obligacion::class, 'id_obligacion');
+	}
 }

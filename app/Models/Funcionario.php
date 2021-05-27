@@ -82,7 +82,10 @@ class Funcionario extends Model
 	{
 		return $this->hasMany(Emergencia::class, 'id_funcionario');
 	}
-
+	public function obligaciones()
+	{
+		return $this->hasMany(Obligacion::class, 'id_funcionario');
+	}
 	public function actividades()
 	{
 		return $this->hasMany(Actividad::class, 'id_funcionario');
