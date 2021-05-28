@@ -23,7 +23,6 @@ class ExportController extends Controller
     public function exportdocx($id)
     {
         $inventario=InventarioSalida::find($id);
-
            $x=DocumentUtil::generate(
                 public_path('formatos/acta_inventario.docx'),
                 array(
