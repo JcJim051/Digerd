@@ -1,3 +1,4 @@
+@if (count($customs)>0)
 @php
 $keys=array_keys( $customs[0]->getAttributes() );
 @endphp
@@ -22,3 +23,8 @@ $keys=array_keys( $customs[0]->getAttributes() );
     </tr>
     @endforeach
 </table>
+@else
+<table>
+<tr></tr>
+</table>
+@endif

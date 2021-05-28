@@ -27,6 +27,36 @@ class DocumentUtil
         $finalPath = $finalDocPath;
         return $finalPath;
     }
+    public static function generateWithTable($templateDoc, $data,$tablename,$datatable, $isPDF = false)
+    {
+
+
+        $phpWord = new TemplateProcessor($templateDoc);
+
+        foreach ($data as $key => $value) {
+            $phpWord->setValue($key, $value);
+        }
+        $phpWord->cloneRowAndSetValues($tablename, $datatable);
+        // $phpWord->setImageValue("logo", array('path' => $logopath, 'width' => 200, 'ratio' => true));
+        // $phpWord->setComplexBlock($grafica->tabla, $table);
+
+        $fnDOwnload = "zzzz_sample_an";
+
+        $finalDocPath = base_path() . "/public/$fnDOwnload.docx";
+        $phpWord->saveAs($finalDocPath);
+        
+        $finalPath = $finalDocPath;
+
+        if ($isPDF) {
+
+            $finalPDFPath = str_replace('.docx', ".pdf", $finalDocPath);
+            Unoconv::conevertDocxToPDF($finalDocPath, $finalPDFPath);
+            $finalPath =  $finalPDFPath;
+        }
+
+        return $finalPath;
+    }
+
     public static function generate($templateDoc, $data, $isPDF = false)
     {
 

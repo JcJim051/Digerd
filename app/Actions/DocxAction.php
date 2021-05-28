@@ -4,16 +4,16 @@ namespace App\Actions;
 
 use TCG\Voyager\Actions\AbstractAction;
 
-class PrintAction extends AbstractAction
+class DocxAction extends AbstractAction
 {
     public function getTitle()
     {
-        return 'PDF';
+        return 'DOCX';
     }
 
     public function getIcon()
     {
-        return 'fa fa-file-pdf-o';
+        return 'fa fa-file-docx-o';
     }
 
     public function getPolicy()
@@ -31,15 +31,14 @@ class PrintAction extends AbstractAction
 
     public function getDefaultRoute()
     {
-        if ($this->dataType->slug == 'inventario-salida' ) 
-            return route('exportdocx',$this->data->id_inventario_salida);
-     
+        if ($this->dataType->slug == 'actas-reunion' ) 
+            return route('exportactareunion',$this->data->id_acta_reunion);
 
     }
     public function shouldActionDisplayOnDataType()
     {
                 
-        if ($this->dataType->slug == 'inventario-salida'  ) 
+        if ($this->dataType->slug == 'actas-reunion' ) 
             return true;
         else
             return false;

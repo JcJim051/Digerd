@@ -7,6 +7,7 @@ use TCG\Voyager\Facades\Voyager;
 use App\LocationFormField;
 use App\ListSelectFormField;
 use App\Actions\PrintAction;
+use App\Actions\DocxAction;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         Voyager::addFormField(LocationFormField::class);
         Voyager::addFormField(ListSelectFormField::class);
         Voyager::addAction(PrintAction::class);
+        Voyager::addAction(DocxAction::class);
     }
 
     /**

@@ -29,6 +29,7 @@ class CustomExport implements FromView, WithDrawings
         return view('exports.customs', [
             'customs' =>  $this->customModel::all()
         ]);
+        
     }
     public function startCell(): string
     {
