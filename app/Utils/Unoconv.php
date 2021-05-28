@@ -7,8 +7,8 @@ class Unoconv
     public static function conevertDocxToPDF($filePath, $output)
     {
 
-        $cmd = "unoconv -f pdf $filePath -o $output";
-//        dd($cmd);
+        $cmd = "unoconv -f pdf $filePath";
+       
         return  shell_exec($cmd);
         // \PhpOffice\PhpWord\Settings::setPdfRendererPath('.');
         // \PhpOffice\PhpWord\Settings::setPdfRendererName(\PhpOffice\PhpWord\Settings::PDF_RENDERER_DOMPDF);
