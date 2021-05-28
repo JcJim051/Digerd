@@ -6,10 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Actividad;
 use App\Models\Generic;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     //
+    public function __construct()
+{
+    $this->middleware(function ($request, $next) {
+        $this->user= Auth::user();
+
+        return $next($request);
+    });
+}
     public function index()
     {
         $sql="select e.descripcion,e.id_emergencia,e.localizacion,coalesce (sum(pa.hombres+pa.mujeres+pa.ninos),0) as personas from emergencias e
