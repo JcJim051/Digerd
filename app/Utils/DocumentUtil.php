@@ -14,7 +14,7 @@ class DocumentUtil
             ['userId' => 2, 'userName' => 'Superman', 'userAddress' => 'Metropolis'],
         ];
         $phpWord->cloneRowAndSetValues('userId', $values);
-        $fnDOwnload = "zzzz_sample_an";
+        $fnDOwnload = "filegenerated_".date('YmdHis').rand(0,1000);
 
         $finalDocPath = base_path() . "/public/$fnDOwnload.docx";
         $phpWord->saveAs($finalDocPath);
@@ -40,7 +40,7 @@ class DocumentUtil
         // $phpWord->setImageValue("logo", array('path' => $logopath, 'width' => 200, 'ratio' => true));
         // $phpWord->setComplexBlock($grafica->tabla, $table);
 
-        $fnDOwnload = "zzzz_sample_an";
+        $fnDOwnload = "filegenerated_".date('YmdHis').rand(0,1000);
 
         $finalDocPath = base_path() . "/public/$fnDOwnload.docx";
         $phpWord->saveAs($finalDocPath);
@@ -69,7 +69,7 @@ class DocumentUtil
         // $phpWord->setImageValue("logo", array('path' => $logopath, 'width' => 200, 'ratio' => true));
         // $phpWord->setComplexBlock($grafica->tabla, $table);
 
-        $fnDOwnload = "zzzz_sample_an";
+        $fnDOwnload = "filegenerated_".date('YmdHis').rand(0,1000);
 
         $finalDocPath = base_path() . "/public/$fnDOwnload.docx";
         $phpWord->saveAs($finalDocPath);
