@@ -6,7 +6,27 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class DocumentUtil
 {
+    public static function generateTest($templateDoc,  $isPDF = false)
+    {
+        $phpWord = new TemplateProcessor($templateDoc);
+        $values = [
+            ['userId' => 1, 'userName' => 'Batman', 'userAddress' => 'Gotham City'],
+            ['userId' => 2, 'userName' => 'Superman', 'userAddress' => 'Metropolis'],
+        ];
+        $phpWord->cloneRowAndSetValues('userId', $values);
+        $fnDOwnload = "zzzz_sample_an";
 
+        $finalDocPath = base_path() . "/public/$fnDOwnload.docx";
+        $phpWord->saveAs($finalDocPath);
+        if ($isPDF) {
+
+            $finalPDFPath = str_replace('.docx', ".pdf", $finalDocPath);
+            Unoconv::conevertDocxToPDF($finalDocPath, $finalPDFPath);
+            $finalPath =  $finalPDFPath;
+        }
+        $finalPath = $finalDocPath;
+        return $finalPath;
+    }
     public static function generate($templateDoc, $data, $isPDF = false)
     {
 
