@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Utils\DocumentUtil;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +32,11 @@ Route::resource('reportes', 'App\Http\Controllers\ReportController');
 Route::get('reportes', 'App\Http\Controllers\ReportController@index')->name('reportes');
 Route::post('reportes.parameters', 'App\Http\Controllers\ReportController@parameters')->name('parameters');
 Route::post('reportes.generate', 'App\Http\Controllers\ReportController@generate')->name('generate');
+
+Route::get('/generateTest', function () {
+
+    return  DocumentUtil::generateTest(
+        public_path('formatos/test.docx'),
+        true  // optional
+    );
+});

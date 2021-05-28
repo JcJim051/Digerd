@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 class ReportController extends Controller
 {
     //
+
+    public function __construct()
+    {
+        $this->middleware('admin.user');
+    }
+
     public function index()
     {
       $reportes = Report::orderBy('nombre','asc')->pluck('nombre', 'reporte');

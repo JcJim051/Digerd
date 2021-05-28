@@ -82,8 +82,15 @@
     right: 2em !important;
     background: none;
     top: 0px !important;
+    padding: 0 3em;
 }
 
+.app-container .content-container .side-menu .navbar-nav li.dropdown ul li a {
+    height: 44px;
+    line-height: 44px;
+    vertical-align: middle;
+    padding: 0 3em;
+}
 .voyager .side-menu.sidebar-inverse .navbar li>a:hover:after, .voyager .side-menu.sidebar-inverse .navbar li.active>a:after {
     top:10px;
     height:30px;
