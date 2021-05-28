@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function () {
     
     Voyager::routes();
-    Route::get("/",'App\Http\Controllers\DashboardController@index')->name('voyager.dashboard');    
+    Route::get("/",'App\Http\Controllers\DashboardController@index')->name('voyager.dashboard')->middleware('admin.user');;    
 });
 Route::get("/dashboard",'App\Http\Controllers\DashboardController@index')->name('dashobard');
 
