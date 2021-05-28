@@ -1,5 +1,5 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/maps/leaflet.css" />
+	<link rel="stylesheet" href="{{asset('/maps/leaflet.css')}}" />
 
 <div class="container">
 		<br>
@@ -29,9 +29,9 @@ Latitud / Longitud:<input type="text"
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="/maps/leaflet.js"></script>
+<script src="{{asset('/maps/leaflet.js')}}"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-<script src="/maps/OSMLocationPicker.js"></script>
+<script src="{{asset('/maps/OSMLocationPicker.js')}}"></script>
 <script>
 @if(isset($dataTypeContent->{$row->field})  )
 
