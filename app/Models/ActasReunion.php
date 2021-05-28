@@ -62,4 +62,8 @@ class ActasReunion extends Model
 	{
 		return $this->hasOne(EmergenciasActa::class, 'id_acta_reunion');
 	}
+	protected function serializeDate(\DateTimeInterface $date)
+	{
+		return $date->format('Y-m-d');
+	}
 }

@@ -27,7 +27,7 @@ Route::get("/dashboard",'App\Http\Controllers\DashboardController@index')->name(
 
 Route::get('/export/{table}', 'App\Http\Controllers\ExportController@exportxlsx')->name('exportxlsx');
 Route::get('/exportdoc/{id}', 'App\Http\Controllers\ExportController@exportdocx')->name('exportdocx');
-
+Route::get('/exportactareunion/{id}', 'App\Http\Controllers\ExportController@exportactareunion')->name('exportactareunion');
 Route::resource('reportes', 'App\Http\Controllers\ReportController');
 Route::get('reportes', 'App\Http\Controllers\ReportController@index')->name('reportes');
 Route::post('reportes.parameters', 'App\Http\Controllers\ReportController@parameters')->name('parameters');
