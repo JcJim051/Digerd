@@ -18,10 +18,16 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'admin'], function () {
+    
     Voyager::routes();
+    Route::get("/",'App\Http\Controllers\DashboardController@index')->name('voyager.dashboard');    
 });
 Route::get("/dashboard",'App\Http\Controllers\DashboardController@index')->name('dashobard');
-Route::get("/api/map",'App\Http\Controllers\DashboardController@map')->name('map');
-Route::get("/api/heatmap",'App\Http\Controllers\DashboardController@heatmap')->name('heatmap');
+
 Route::get('/export/{table}', 'App\Http\Controllers\ExportController@exportxlsx')->name('exportxlsx');
-   
+Route::get('/exportdoc/{id}', 'App\Http\Controllers\ExportController@exportdocx')->name('exportdocx');
+
+Route::resource('reportes', 'App\Http\Controllers\ReportController');
+Route::get('reportes', 'App\Http\Controllers\ReportController@index')->name('reportes');
+Route::post('reportes.parameters', 'App\Http\Controllers\ReportController@parameters')->name('parameters');
+Route::post('reportes.generate', 'App\Http\Controllers\ReportController@generate')->name('generate');

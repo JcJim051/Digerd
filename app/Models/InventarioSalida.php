@@ -44,7 +44,7 @@ class InventarioSalida extends Model
 		return $this->belongsTo(Emergencia::class, 'id_emergencia');
 	}
 
-	public function entidade()
+	public function entidad()
 	{
 		return $this->belongsTo(Entidad::class, 'id_entidad');
 	}
