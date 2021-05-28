@@ -36,7 +36,7 @@ class ExportController extends Controller
             );
             $date=new Carbon();
             
-            return response()->download($x, 'acta'.$date->toString().'.pdf', [], 'inline');
+            return response()->download($x, 'acta'.$date->format('YmdHi').'.pdf', [], 'inline');
 
           
         
