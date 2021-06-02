@@ -39,6 +39,9 @@ class SeguimientosMaquinaria extends Model
 		'id_maquinaria',
 		'horas'
 	];
+/**
+ * @Eloquent\Relation
+ */
 
 	public function maquinaria()
 	{

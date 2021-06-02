@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Exports\CustomExport;
+use App\Exports\ExcelExporter;
 use Maatwebsite\Excel\Facades\Excel;
 use TCG\Voyager\Models\DataType;
 use App\Utils\DocumentUtil;
@@ -16,9 +16,9 @@ class ExportController extends Controller
     //
     public function exportxlsx($table)
     {
-        $datatype=DataType::find($table);
-        
-        return Excel::download(new CustomExport($datatype->model_name,"/images/logob.png"),"download.xlsx");
+        //$datatype=DataType::find($table);
+       // dd($datatype->editRows);
+        return Excel::download(new ExcelExporter($table,"/images/logob.png"),"download.xlsx");
     }
     public function exportdocx($id)
     {

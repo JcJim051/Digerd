@@ -10,13 +10,14 @@
                 
             </ol>
             @show
-        </div>
-        <div style="text-align: center;">
-        <ol class="breadcrumb hidden-xs">
+            
+            <ol class="breadcrumb " class="navbar-header">
             <img src="{{asset('images/logob.png')}}">                
-            <img src="{{asset('images/logoungrd.png')}}">                
             </ol>
-        </div> 
+        
+        </div>
+        
+        
         <ul class="nav navbar-nav @if (__('voyager::generic.is_rtl') == 'true') navbar-left @else navbar-right @endif">
 
             <li class="dropdown profile">
