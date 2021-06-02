@@ -36,7 +36,14 @@ class Mantenimiento extends Model
 		'fecha',
 		'costo'
 	];
-
+	public function export()
+	{
+		return array(
+			"fecha" => $this->fecha,
+			"maquinaria" => $this->maquinaria()->descripcion
+		);
+	}
+    protected $with = ['maquinaria'];
 	public function maquinaria()
 	{
 		return $this->belongsTo(Maquinaria::class, 'id_mantenimiento');
