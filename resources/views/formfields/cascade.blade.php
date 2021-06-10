@@ -26,22 +26,5 @@ function changeSelect(Selectedobject)
 
 </script>
 <select class="form-control select2" name="{{ $row->field }}" id="{{ $row->field }}" >
-    @if(isset($options))
-    <?php 
-        $opciones=Illuminate\Support\Facades\DB::table($options->table)->get();
-
-
-    ?>
-        @foreach($opciones as $opcion)
-                <?php $selected = ''; ?>
-            @if(is_array($dataTypeContent->{$row->field}) && in_array($opcion->{$options->return_field}, $dataTypeContent->{$row->field}))
-                <?php $selected = 'selected="selected"'; ?>
-            @elseif(!is_null(old($row->field)) && in_array($opcion->{$options->display_field}, old($row->field)))
-                <?php $selected = 'selected="selected"'; ?>
-            @endif
-            <option value="{{ $opcion->{$options->return_field} }}" {!! $selected !!}>
-                {{ $opcion->{$options->display_field} }}
-            </option>
-        @endforeach
-    @endif
+     
 </select>
