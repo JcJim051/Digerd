@@ -22,4 +22,4 @@ Route::get("/municipios",'App\Http\Controllers\ApiController@municipios')->name(
 Route::get("/obligaciones/{id}",function ($id) {
     $opciones=Illuminate\Support\Facades\DB::table("obligaciones")->where("id_funcionario","=",$id)->get();
     return $opciones;
-});
+})->name('apiobligaciones');

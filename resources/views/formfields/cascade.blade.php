@@ -12,7 +12,7 @@ function changeSelect(Selectedobject)
     selectfield=document.getElementById("{{ $row->field }}");
     $.ajax({
         type: "get",
-        url: "/api/obligaciones/"+value,
+        url: "/reportes/api/obligaciones/"+value,
         contentType: "application/json",              
         dataType: "json",
         success: function (state) {
