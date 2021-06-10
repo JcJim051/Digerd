@@ -123,6 +123,7 @@
                                             if ($data->{$row->field.'_browse'}) {
                                                 $data->{$row->field} = $data->{$row->field.'_browse'};
                                             }
+                                      
                                             @endphp
                                             <td>
                                                 @if (isset($row->details->view))

@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post("/login",'App\Http\Controllers\ApiAuthController@login')->name('apilogin');
 Route::get("/municipios",'App\Http\Controllers\ApiController@municipios')->name('apimunicipios');
+Route::get("/obligaciones/{id}",function ($id) {
+    $opciones=Illuminate\Support\Facades\DB::table("obligaciones")->where("id_funcionario","=",$id)->get();
+    return $opciones;
+});
