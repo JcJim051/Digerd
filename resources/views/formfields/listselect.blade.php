@@ -5,22 +5,22 @@
 @php
 $dataTypeContent->{$row->field} = json_decode($dataTypeContent->{$row->field})
 @endphp
-<select class="form-control select2" name="{{ $row->field }}[]" multiple>
-    @if(isset($options->options))
+<select class="form-control select2" name="{{ $row->field }}" id="{{ $row->field }}" onChange="changeSelect(this);">
+    @if(isset($options))
     <?php 
-        $options=Illuminate\Support\Facades\DB::table($options->options->tabla)->get();
+        $opciones=$options->model::all();
         
 
     ?>
-        @foreach($options as $opcion)
+        @foreach($opciones as $opcion)
                 <?php $selected = ''; ?>
-            @if(is_array($dataTypeContent->{$row->field}) && in_array($opcion->nombre, $dataTypeContent->{$row->field}))
+            @if(is_array($dataTypeContent->{$row->field}) && in_array($opcion->{$options->display_field}, $dataTypeContent->{$row->field}))
                 <?php $selected = 'selected="selected"'; ?>
-            @elseif(!is_null(old($row->field)) && in_array($opcion->nombre, old($row->field)))
+            @elseif(!is_null(old($row->field)) && in_array($opcion->{$options->display_field}, old($row->field)))
                 <?php $selected = 'selected="selected"'; ?>
             @endif
-            <option value="{{ $opcion->nombre }}" {!! $selected !!}>
-                {{ $opcion->descripcion }}
+            <option value="{{ $opcion->{$options->return_field} }}" {!! $selected !!}>
+                {{ $opcion->{$options->display_field} }}
             </option>
         @endforeach
     @endif
