@@ -9,8 +9,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use TCG\Voyager\Models\DataType;
 use App\Utils\DocumentUtil;
 use App\Models\InventarioSalida;
+use App\Models\Informe;
+use App\Models\Actividad;
 use App\Models\ActasReunion;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 class ExportController extends Controller
 {
     //
@@ -32,12 +35,53 @@ class ExportController extends Controller
                     'responsable' => $inventario->entidad->responsable,
                     'telefono' => $inventario->entidad->telefono,
                     'entidad' => $inventario->entidad->nombre
+ 
                 ),
                 true  // optional
             );
             $date=new Carbon();
             
             return response()->download($x, 'acta'.$date->format('YmdHi').'.pdf', [], 'inline');
+        
+    }
+    public function exportinforme($id)
+    {
+        $informe=Informe::find($id);
+        DB::enableQueryLog();
+        $listactividades=Actividad::all();
+        //      where("id_funcionario","=",$informe->id_funcionario)
+        //->whereBetween('fecha_estimada',[$informe->inicio,$informe->fin])->get();
+  
+        $actividades=array();
+        foreach($listactividades as $actividad)
+        {
+            if (isset($actividad->obligacion->descripcion))
+              $obligacion=$actividad->obligacion->descripcion;
+            else
+              $obligacion="";  
+            $actividades[]=array("actividades"=>$actividad->descripcion,"obligacion"=>$obligacion);
+        }
+//dd($listactividades);
+           $x=DocumentUtil::generateWithTable(
+                public_path('formatos/informe.docx'),
+                array(
+                    'cc' => $informe->funcionario->documento,
+                    'elaboracion' => $informe->elaboracion,
+                    'contrato' => $informe->funcionario->contrato,
+                    'nombre' => $informe->funcionario->nombre,
+                    'objeto' => $informe->funcionario->objeto,
+                    'periodo'=> $informe->inicio.' al '.$informe->fin,
+                    'observaciones' => $informe->observaciones,
+                    'numero'=> $informe->numero
+                    
+                ),
+                "actividades",                            
+                $actividades,
+                false // optional
+            );
+            $date=new Carbon();
+            
+            return response()->download($x, 'informe'.$date->format('YmdHi').'.docx', [], 'inline');
         
     }
     public function exportactareunion($id)

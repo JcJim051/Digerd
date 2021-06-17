@@ -33,6 +33,8 @@ class PrintAction extends AbstractAction
     {
         if ($this->dataType->slug == 'inventario-salida' ) 
             return route('exportdocx',$this->data->id_inventario_salida);
+ 
+            
      
 
     }

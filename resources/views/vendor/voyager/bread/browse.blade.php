@@ -132,6 +132,15 @@
                                                     <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                                                 @elseif($row->type == 'relationship')
                                                     @include('voyager::formfields.relationship', ['view' => 'browse','options' => $row->details])
+                                                @elseif($row->type == 'listselect')
+                                                       {{$row->details->model::find($data->{$row->field})->{$row->details->display_field} }}
+                                                @elseif($row->type == 'location')
+                                                @php
+                                                  $loc=explode(",",$data->{$row->field} );
+                                                  $tt="#@".$loc[1].",".$loc[0];
+                                                @endphp
+                                                       <a target="_blank" href="https://firms.modaps.eosdis.nasa.gov/map/{{ $tt }},8z">Mapa FIRMS</a> 
+                                                  
                                                 @elseif($row->type == 'select_multiple')
                                                     @if(property_exists($row->details, 'relationship'))
 
