@@ -69,11 +69,12 @@
                                     <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
                                 @endif
                                 @php
-                                   
-                                   $restricted = $row->details->restricted ?? NULL;
-                                   
+                                   if (auth()->user()->hasRole('funcionario'))
+                                        $restricted = $row->details->restricted ?? NULL;
+                                   else
+                                       $restricted=NULL;
                                    $hidden=auth()->user()->hasRole('funcionario') && $restricted && $edit;
-                                        
+                                       
                                 @endphp
                                 <div class="form-group @if($row->type == 'hidden' || $hidden) hidden @endif col-md-{{ $display_options->width ?? 12 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
                                     {{ $row->slugify }}
@@ -107,6 +108,8 @@
                                 <button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
                             @stop
                             @yield('submit-buttons')
+                            <a href={{ URL::previous() }}><button type="button" class="btn btn-secondary save">Cancelar</button></a>
+
                         </div>
                     </form>
 

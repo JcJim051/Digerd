@@ -33,10 +33,8 @@ class InventarioSalida extends Model
 
 	protected $fillable = [
 		'id_emergencia',
-		'cantidad',
 		'fecha',
-		'id_entidad',
-		'id_inventario_entrada'
+		'id_entidad'
 	];
 
 	public function emergencia()
@@ -47,10 +45,5 @@ class InventarioSalida extends Model
 	public function entidad()
 	{
 		return $this->belongsTo(Entidad::class, 'id_entidad');
-	}
-
-	public function inventario_entrada()
-	{
-		return $this->belongsTo(InventarioEntrada::class, 'id_inventario_entrada');
 	}
 }

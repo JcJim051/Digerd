@@ -69,9 +69,10 @@
                                     <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
                                 @endif
                                 @php
-                                   
-                                   $restricted = $row->details->restricted ?? NULL;
-                                   
+                                if (auth()->user()->hasRole('funcionario'))
+                                        $restricted = $row->details->restricted ?? NULL;
+                                   else
+                                       $restricted=NULL;
                                    $hidden=auth()->user()->hasRole('funcionario') && $restricted && $edit;
                                         
                                 @endphp
@@ -84,6 +85,17 @@
                                         @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add'), 'view' => ($edit ? 'edit' : 'add'), 'options' => $row->details])
                                     @elseif ($row->type == 'relationship')
                                         @include('voyager::formfields.relationship', ['options' => $row->details])
+                                    @elseif (($row->field == 'aprobado'))
+                                    @php
+                                     $incompletas=\App\Utils\ValidarActividades::validar($dataTypeContent->id_informe);
+                                    @endphp
+                                        @if ($incompletas>0)
+                                         <p><font color="#cc0000"> No es posible aprobar el informe, el funcionario tiene {{$incompletas}} actividad(es) pendientes.
+                                         <a href="{{route('voyager.actividades.index')}}" target="_blank">Haga click para ver actividades</a>
+                                         </font><p>
+                                        @else  
+                                                {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
+                                        @endif
                                     @else
                                         {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                                     @endif
@@ -107,6 +119,8 @@
                                 <button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
                             @stop
                             @yield('submit-buttons')
+                            <a href={{ URL::previous() }}><button type="button" class="btn btn-secondary save">Cancelar</button></a>
+               
                         </div>
                     </form>
 
