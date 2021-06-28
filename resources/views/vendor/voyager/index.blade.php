@@ -70,7 +70,11 @@
                                     <p> {{$actividad->descripcion}} </p>
                                 </td>
                                 <td>
+                                    @if (isset($actividad->obligacion))
                                     <p> {{$actividad->obligacion->descripcion}} </p>
+                                    @else
+                                    <p> N/A </p>
+                                    @endif
                                 </td>
                                 <td>
                                     <p> {{$actividad->fecha_estimada}}</p>

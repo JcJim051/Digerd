@@ -5,12 +5,10 @@
 @php
 $dataTypeContent->{$row->field} = json_decode($dataTypeContent->{$row->field})
 @endphp
-<select class="form-control select2" name="{{ $row->field }}" id="{{ $row->field }}" onChange="changeSelect(this);">
+<select required class="form-control select2" name="{{ $row->field }}" id="{{ $row->field }}" onChange="changeSelect(this);">
     @if(isset($options))
     <?php 
         $opciones=$options->model::all();
-        
-
     ?>
         @foreach($opciones as $opcion)
                 <?php $selected = ''; ?>

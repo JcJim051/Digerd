@@ -12,7 +12,7 @@ function changeSelect(Selectedobject)
     selectfield=document.getElementById("{{ $row->field }}");
     $.ajax({
         type: "get",
-        url: "/api/obligaciones/"+value,
+        url: '{{URL::to("/api/obligaciones")}}/'+value,
         contentType: "application/json",              
         dataType: "json",
         success: function (state) {
@@ -23,7 +23,11 @@ function changeSelect(Selectedobject)
      }
   });
 }
-
+window.onload = function () {
+var el = document.getElementById("id_funcionario");
+		//el.value = 1; //Set default value
+        el.onchange(); 
+}
 </script>
 <select class="form-control select2" name="{{ $row->field }}" id="{{ $row->field }}" >
      

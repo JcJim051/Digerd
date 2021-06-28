@@ -9,9 +9,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use TCG\Voyager\Models\DataType;
 use App\Utils\DocumentUtil;
 use App\Models\InventarioSalida;
+use App\Models\DetalleInventario;
 use App\Models\Informe;
 use App\Models\Actividad;
 use App\Models\ActasReunion;
+use App\Models\Proyecto;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 class ExportController extends Controller
@@ -26,17 +28,26 @@ class ExportController extends Controller
     public function exportdocx($id)
     {
         $inventario=InventarioSalida::find($id);
-           $x=DocumentUtil::generate(
+        $elementos=array();
+        $detalle=DetalleInventario::where("id_inventario_salida","=",$id)->get();
+        $i=1;
+        foreach($detalle as $d)
+        {
+        $elementos[]=array("detalle"=>$i,"elemento"=>$d->tipo_ayuda->descripcion,"cantidad"=>$d->cantidad);
+        
+        $i++;
+        }
+        $x=DocumentUtil::generateWithTable(
                 public_path('formatos/acta_inventario.docx'),
                 array(
-                    'elemento' => $inventario->inventario_entrada->tipos_ayuda->descripcion,
                     'fecha' => $inventario->fecha,
-                    'cantidad' => $inventario->cantidad,
                     'responsable' => $inventario->entidad->responsable,
                     'telefono' => $inventario->entidad->telefono,
                     'entidad' => $inventario->entidad->nombre
  
                 ),
+                "detalle",
+                $elementos,
                 true  // optional
             );
             $date=new Carbon();
@@ -48,9 +59,7 @@ class ExportController extends Controller
     {
         $informe=Informe::find($id);
         DB::enableQueryLog();
-        $listactividades=Actividad::all();
-        //      where("id_funcionario","=",$informe->id_funcionario)
-        //->whereBetween('fecha_estimada',[$informe->inicio,$informe->fin])->get();
+        $listactividades=Actividad::where("id_funcionario","=",$informe->id_funcionario)->whereBetween('fecha_estimada',[$informe->inicio,$informe->fin])->get();
   
         $actividades=array();
         foreach($listactividades as $actividad)
@@ -108,4 +117,20 @@ class ExportController extends Controller
             return response()->download($x, 'acta'.$date->format('YmdHi').'.docx', []);
         
     }
+    public function exportproyecto($id)
+    {
+        $proyecto=Proyecto::find($id);
+        $proyecto_array=$proyecto->toArray();
+        $proyecto_array["municipio"]=$proyecto->municipio->nombre;
+        $x=DocumentUtil::generate(
+                public_path('formatos/proyectos.docx'),
+                $proyecto_array,
+                false  // optional
+            );
+            $date=new Carbon();
+            
+            return response()->download($x, 'proyecto_'.$date->format('YmdHi').'.docx', []);
+        
+    }
+
 }

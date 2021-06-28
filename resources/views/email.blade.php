@@ -11,11 +11,10 @@
 
                 <!-- START CENTERED WHITE CONTAINER -->
                 <span class="preheader"
-                    style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Token.</span>
                 <table class="main"
                     style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #999999; border-radius: 3px;">
-                    <img src="https://sos.meta.gov.co/static/web/img/logo.png" width="200" alt="Logo Icon"
-                    style="width: 243px;float:right;position:relative;top: 8px;right: 400px;">
+                    <img src="https://sos.meta.gov.co/static/web/img/logo.png" width="100" alt="Logo Icon"
+                    style="width: 100px;float:right;position:relative;top: 8px;right: 400px;">
                     <!-- START MAIN CONTENT AREA -->
                     <tr>
                         <td class="wrapper"
