@@ -9,6 +9,6 @@ class ApiController extends Controller
     //
     public function municipios()
     {
-        return Municipio2::all();
+        return Municipio2::Select("id_municipio","nombre")->get();
     }
 }

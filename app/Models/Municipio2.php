@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @package App\Models
  */
-class Municipio extends Model
+class Municipio2 extends Model
 {
 	protected $table = 'municipios';
 	protected $primaryKey = 'id_municipio';
