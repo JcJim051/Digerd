@@ -63,7 +63,17 @@
                                 @endphp
                                 @include('voyager::formfields.relationship')
                             </div>
+                            <div class="form-group">
+                                <label for="municipio">Municipio</label>
+                                @php
+                                    $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
 
+                                    $row     = $dataTypeRows->where('field', 'user_belongsto_municipio_relationship')->first();
+                                    //dd($row);
+                                    $options = $row->details; //json_decode($row->details);
+                                @endphp
+                                @include('voyager::formfields.relationship')
+                            </div>
                             <div class="form-group">
                                 <label for="password">{{ __('voyager::generic.password') }}</label>
                                 @if(isset($dataTypeContent->password))

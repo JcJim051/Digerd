@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Municipio
@@ -25,7 +26,15 @@ class Municipio extends Model
 	protected $primaryKey = 'id_municipio';
 	public $incrementing = false;
 	public $timestamps = false;
-
+	protected static function boot()
+    {
+            parent::boot();
+			if (auth()->user()->hasRole('municipio') ) {
+				static::addGlobalScope('municipio', function (Builder $builder) {
+						$builder->where('id_municipio', '=', auth()->user()->id_municipio);
+				});
+		}
+    }
 
 	protected $fillable = [
 		'nombre'
