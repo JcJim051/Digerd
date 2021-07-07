@@ -31,9 +31,6 @@
         </div>
         <div id="adminmenu">
             <admin-menu :items="{{ menu('admin', '_json') }}"></admin-menu>
-        @if ( Auth::user()->hasRole('admin') )
-            <admin-menu :items="{{ \App\Models\Menu::display('reportes','_json') }}"></admin-menu>
-        @endif    
         </div>
     </nav>
 </div>
