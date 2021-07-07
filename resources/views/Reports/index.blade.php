@@ -330,21 +330,22 @@
         {
           "extend": "excel",
           "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>Export to Excel</span>",
-          "className": "btn btn-white btn-primary btn-bold"
+          "className": "btn btn-white btn-primary btn-bold",
+          "action":function ( e, dt, node, config ) {
+          @if (isset($reporte) && isset($encoded))  
+            window.open('{{route("reporter",[$reporte,0,$encoded])}}','_blank');
+          @endif      
+          }
         },
         {
           "extend": "pdf",
-          @if($step == 3)
-          @if($res -> landscape == 1)
-          "orientation": "landscape",
-          @endif
-          @endif "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i> <span class='hidden'>Export to PDF</span>",
-          "className": "btn btn-white btn-primary btn-bold"
-        },
-        {
-          "extend": "print",
-          "text": "<i class='fa fa-print bigger-110 red'></i> <span class='hidden'>Export to PDF</span>",
-          "className": "btn btn-white btn-primary btn-bold"
+          "text": "<i class='fa fa-file-pdf-o bigger-110 green'></i> <span class='hidden'>Export to Excel</span>",
+          "className": "btn btn-white btn-primary btn-bold",
+          "action":function ( e, dt, node, config ) {
+            @if (isset($reporte) && isset($encoded))  
+              window.open('{{route("reporter",[$reporte,1,$encoded])}}','_blank');
+            @endif
+            }
         }
       ],
       "language": {

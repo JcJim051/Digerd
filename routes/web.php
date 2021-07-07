@@ -34,6 +34,8 @@ Route::resource('reportes', 'App\Http\Controllers\ReportController');
 Route::get('reportes', 'App\Http\Controllers\ReportController@index')->name('reportes');
 Route::post('reportes.parameters', 'App\Http\Controllers\ReportController@parameters')->name('parameters');
 Route::post('reportes.generate', 'App\Http\Controllers\ReportController@generate')->name('generate');
+Route::get('reportes.reporter/{reporte}/{ispdf}/{data}', 'App\Http\Controllers\ReportController@reporter')->name('reporter');
+
 Route::post('/addinventario','App\Http\Controllers\InventarioController@adicionar')->name('addinventario');
 Route::get('/generateTest', function () {
 
