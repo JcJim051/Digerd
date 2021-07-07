@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post("/login",'App\Http\Controllers\ApiAuthController@login')->name('apilogin');
 Route::get("/municipios",'App\Http\Controllers\ApiController@municipios')->name('apimunicipios');
+Route::get("/tiposemergencia",'App\Http\Controllers\ApiController@tiposemergencia')->name('apitiposemergencia');
+Route::post("/emergencia",'App\Http\Controllers\ApiController@postemergencia')->name('postemergencia');
 Route::get("/obligaciones/{id}",function ($id) {
     $opciones=Illuminate\Support\Facades\DB::table("obligaciones")->where("id_funcionario","=",$id)->get();
     return $opciones;
