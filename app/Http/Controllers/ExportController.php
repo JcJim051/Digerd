@@ -13,6 +13,7 @@ use App\Models\DetalleInventario;
 use App\Models\Informe;
 use App\Models\Actividad;
 use App\Models\ActasReunion;
+use App\Models\Emergencia;
 use App\Models\Proyecto;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,14 @@ class ExportController extends Controller
         //$datatype=DataType::find($table);
        // dd($datatype->editRows);
         return Excel::download(new ExcelExporter($table,"/images/logob.png"),"download.xlsx");
+    }
+    public function exportemergencia($id)
+    {
+        $emergencia=Emergencia::find($id);
+        $x=DocumentUtil::generateWithEmergencia(public_path('formatos/informe_emergencia.docx'),$emergencia,false);
+        $date=new Carbon();
+        return response()->download($x, 'informe_emergencia'.$date->format('YmdHi').'.docx', [], 'inline');
+        
     }
     public function exportdocx($id)
     {

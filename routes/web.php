@@ -27,6 +27,8 @@ Route::get("/dashboard",'App\Http\Controllers\DashboardController@index')->name(
 
 Route::get('/export/{table}', 'App\Http\Controllers\ExportController@exportxlsx')->name('exportxlsx');
 Route::get('/exportdoc/{id}', 'App\Http\Controllers\ExportController@exportdocx')->name('exportdocx');
+Route::get('/exportemergencia/{id}', 'App\Http\Controllers\ExportController@exportemergencia')->name('exportemergencia');
+
 Route::get('/exportinforme/{id}', 'App\Http\Controllers\ExportController@exportinforme')->name('exportinforme');
 Route::get('/exportproyecto/{id}', 'App\Http\Controllers\ExportController@exportproyecto')->name('exportproyecto');
 Route::get('/exportactareunion/{id}', 'App\Http\Controllers\ExportController@exportactareunion')->name('exportactareunion');
@@ -37,6 +39,10 @@ Route::post('reportes.generate', 'App\Http\Controllers\ReportController@generate
 Route::get('reportes.reporter/{reporte}/{ispdf}/{data}', 'App\Http\Controllers\ReportController@reporter')->name('reporter');
 
 Route::post('/addinventario','App\Http\Controllers\InventarioController@adicionar')->name('addinventario');
+Route::post('/addaccion','App\Http\Controllers\EmergenciaController@addaccion')->name('addaccion');
+Route::post('/addinversion','App\Http\Controllers\EmergenciaController@addinversion')->name('addinversion');
+Route::post('/addpersona','App\Http\Controllers\EmergenciaController@addpersona')->name('addpersona');
+
 Route::get('/generateTest', function () {
 
     return  DocumentUtil::generateTest(
