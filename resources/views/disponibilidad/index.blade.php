@@ -58,12 +58,7 @@
 
                   @foreach ($v as $d)
 
-                    <tr role="row" class="
-                    @if ($loop->iteration%2==0) 
-                    odd
-                    else
-                    even
-                    ">
+                    <tr role="row" class="odd">
                       <td>
                         <div>{{$d->descripcion}}</div>
                       </td>
