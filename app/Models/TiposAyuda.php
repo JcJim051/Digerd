@@ -41,7 +41,6 @@ class TiposAyuda extends Model
 		$sql2="select coalesce(sum(cantidad),0) as total  from detalle_inventario where id_tipo_ayuda ={$this->id_tipo_ayuda}";
 		$result1=DB::Select($sql)[0];
 		$result2=DB::Select($sql2)[0];
-		
 		return $result1->total-$result2->total;
     
 	}

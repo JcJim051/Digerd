@@ -7,10 +7,16 @@ use TCG\Voyager\Http\Controllers\VoyagerBaseController;
 use TCG\Voyager\Facades\Voyager;
 use App\Models\TiposAyuda;
 use App\Models\DetalleInventario;
+use App\Models\VTiposAyuda;
 use Illuminate\Support\Facades\DB;
 class InventarioController extends VoyagerBaseController
 {
     //
+    public function disponibilidad()
+    {
+        $v=VTiposAyuda::all();
+        return view("disponibilidad.index",compact('v'));
+    }
     public function adicionar(Request $request)
     {
         $input=$request->input();
