@@ -18,7 +18,15 @@ function changeSelect(Selectedobject)
         success: function (state) {
         $("#{{ $row->field }}").empty();
         $.each(state, function () {
-            $("#{{ $row->field }}").append($("<option></option>").val(this['id_obligacion']).html(this['descripcion']));
+            @if(isset($dataTypeContent->{$row->field}))
+                if (this['id_obligacion']=={{ $dataTypeContent->{$row->field} }})
+                    $("#{{ $row->field }}").append($("<option selected></option>").val(this['id_obligacion']).html(this['descripcion']));
+                else
+                    $("#{{ $row->field }}").append($("<option></option>").val(this['id_obligacion']).html(this['descripcion']));
+                
+            @else
+             $("#{{ $row->field }}").append($("<option></option>").val(this['id_obligacion']).html(this['descripcion']));
+            @endif
         });
      }
   });
@@ -27,6 +35,7 @@ window.onload = function () {
 var el = document.getElementById("id_funcionario");
 		//el.value = 1; //Set default value
         el.onchange(); 
+
 }
 </script>
 <select class="form-control select2" name="{{ $row->field }}" id="{{ $row->field }}" >

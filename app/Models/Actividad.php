@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Mail;
+use Illuminate\Support\Facades\Auth;
+
 class Actividad extends Model
 {
 	protected $table = 'actividades';
@@ -19,11 +21,12 @@ class Actividad extends Model
 	
 	protected static function boot()
     {
-            parent::boot();
-			if (auth()->user()->hasRole('funcionario') ) {
-				static::addGlobalScope('funcionario', function (Builder $builder) {
-						$builder->where('id_funcionario', '=', auth()->user()->id_funcionario);
-				});
+			parent::boot();
+			if (Auth::check())
+				if (auth()->user()->hasRole('funcionario') ) {
+					static::addGlobalScope('funcionario', function (Builder $builder) {
+							$builder->where('id_funcionario', '=', auth()->user()->id_funcionario);
+					});
 		}
     }
 	public function funcionario()
@@ -38,9 +41,9 @@ class Actividad extends Model
 	{
 		
 	parent::save();
-	$data = array('name'=>"Juan Fajardo");
+	$data = array('name'=>$this->funcionario->nombre);
 		Mail::send('email', $data, function($message) use ($data) {
-		$message->to('juanfbarrero@gmail.com', 'Juan Fajardo')->subject('Actividades en SOSMeta');
+		$message->to($this->funcionario->email, $this->funcionario->email)->subject('Actividades en SOSMeta');
 		
 		});
 	}
