@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class Funcionario
@@ -69,8 +70,9 @@ class Funcionario extends Model
 
 	protected static function boot()
     {
-            parent::boot();
-			if (auth()->user()->hasRole('funcionario') ) {
+			parent::boot();
+			if (Auth::check())
+				if (auth()->user()->hasRole('funcionario') ) {
 				static::addGlobalScope('funcionario', function (Builder $builder) {
 						$builder->where('id_funcionario', '=', auth()->user()->id_funcionario);
 				});
