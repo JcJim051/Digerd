@@ -55,3 +55,6 @@ Route::get('/generateTest', function () {
 
 Route::get("/site","App\Http\Controllers\SiteController@index")->name("site");
 Route::get("/site/{id}","App\Http\Controllers\SiteController@page")->name("sitepage");
+Route::get("/ayuda",function () {
+    return redirect("/site");
+});
