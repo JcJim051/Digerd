@@ -32,6 +32,7 @@
                             <h6>{{ Auth::user()->email }}</h6>
                         </div>
                     </li>
+                    
                     <li class="divider"></li>
                     <?php $nav_items = config('voyager.dashboard.navbar_items'); ?>
                     @if(is_array($nav_items) && !empty($nav_items))
