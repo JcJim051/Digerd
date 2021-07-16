@@ -37,12 +37,14 @@ class DocxAction extends AbstractAction
             return route('exportinforme', $this->data->id_informe);
         if ($this->dataType->slug == 'proyectos')
             return route('exportproyecto', $this->data->id_proyecto);
+        if ($this->dataType->slug == 'emergencias' ) 
+            return route('exportemergencia',$this->data->id_emergencia);
 
         }
     public function shouldActionDisplayOnDataType()
     {
 
-        if ($this->dataType->slug == 'actas-reunion' ||  $this->dataType->slug == 'informes' ||  $this->dataType->slug == 'proyectos' )
+        if ($this->dataType->slug == 'actas-reunion' ||  $this->dataType->slug == 'informes' ||  $this->dataType->slug == 'proyectos' || $this->dataType->slug == 'emergencias' )
             return true;
         else
             return false;
