@@ -40,12 +40,13 @@
 									@if (isset($content->image))
 									<span class="image main"><img src="{{Voyager::image( $content->image )}}" alt="" /></span>
 									@endif
-									@if (isset($content->video))
+								
 									{!!$content->content!!}
 									@php
 									   $video=json_decode($content->video);
 									@endphp
-
+									@if (isset($video[0]))
+									
 									<span class="image main">
 									<video controls style="width: 100%">
 										<source src="{{ Storage::disk(config('voyager.storage.disk'))->url($video[0]->download_link) ?: '' }}" type="video/webm">
