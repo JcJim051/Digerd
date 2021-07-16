@@ -33,8 +33,7 @@ class PrintAction extends AbstractAction
     {
         if ($this->dataType->slug == 'inventario-salida' ) 
             return route('exportdocx',$this->data->id_inventario_salida);
-        if ($this->dataType->slug == 'emergencias' ) 
-            return route('exportemergencia',$this->data->id_emergencia);
+       
  
             
      
@@ -43,7 +42,7 @@ class PrintAction extends AbstractAction
     public function shouldActionDisplayOnDataType()
     {
                 
-        if ($this->dataType->slug == 'inventario-salida'  || $this->dataType->slug == 'emergencias' ) 
+        if ($this->dataType->slug == 'inventario-salida'   ) 
             return true;
         else
             return false;
