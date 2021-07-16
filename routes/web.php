@@ -51,3 +51,7 @@ Route::get('/generateTest', function () {
         true  // optional
     );
 });
+
+
+Route::get("/site","App\Http\Controllers\SiteController@index")->name("site");
+Route::get("/site/{id}","App\Http\Controllers\SiteController@page")->name("sitepage");

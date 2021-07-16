@@ -137,6 +137,11 @@ return [
                 'icon_class'   => 'voyager-home',
                 'target_blank' => true,
             ],
+            'Ayuda' => [
+                'route'        => '/site',
+                'icon_class'   => 'fa fa-question-circle ',
+                'target_blank' => true,
+            ],
             'voyager::generic.logout' => [
                 'route'      => 'voyager.logout',
                 'icon_class' => 'voyager-power',
@@ -213,13 +218,15 @@ return [
     'media' => [
         // The allowed mimetypes to be uploaded through the media-manager.
         // 'allowed_mimetypes' => '*', //All types can be uploaded
-        'allowed_mimetypes' => [
+        'allowed_mimetypes' => '*',
+/*[
           'image/jpeg',
           'image/png',
           'image/gif',
           'image/bmp',
           'video/mp4',
-        ],
+          'video/webm',
+        ],*/
         //Path for media-manager. Relative to the filesystem.
         'path'                => '/',
         'show_folders'        => true,
