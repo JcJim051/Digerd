@@ -20,5 +20,6 @@ class ApiController extends Controller
     public function postemergencia(Request $request)
     {
         Storage::put('data.txt',$request->getContent());
+        return "ok";
     }
 }
