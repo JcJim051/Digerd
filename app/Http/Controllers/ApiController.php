@@ -20,24 +20,28 @@ class ApiController extends Controller
     public function postemergencia(Request $request)
     {
             Storage::put('data.txt',$request->getContent());
+            //    return $request;
             if($request->hasfile('photos'))
              {
-    
+                $x="";
                 foreach($request->file('photos') as $file)
-    
                 {
-    
-                    $name = time().'.'.$file->extension();
+                    
+                    $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).time().'.'.$file->extension();
     
                     $file->move(public_path().'/files/', $name);  
-    
+
                     $data[] = $name;  
-    
                 }
-    
              }
-    
-    
-            return "ok";
+             if($request->hasfile('video'))
+             {
+                    $file=$request->file("video");
+                    $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).time().'.'.$file->extension();
+                    $file->move(public_path().'/files/', $name);  
+                    $data[] = $name;  
+             }
+
+             return "ok";
         }
 }
