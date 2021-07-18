@@ -26,15 +26,6 @@ class ApiController extends Controller
             extract($request->input());
             //    return $request;
 	        $data=Array();
-            $emergencia=new Emergencia;
-            $emergencia->descripcion=$description;
-            $emergencia->fecha=Carbon::Now();
-            $emergencia->id_municipio=$cityId;
-            $emergencia->tipo_emergencia=$emergency_type;
-            $emergencia->localizacion=$geolocation;
-            $user=User::where("email","=",$email)->first();
-            $emergencia->user_id=$user->id;
-            $emergencia->save();
             if($request->hasfile('photos'))
              {
                 $x="";
@@ -55,9 +46,19 @@ class ApiController extends Controller
                     $file->move(public_path().'/files/', $name);  
                     $data[] = $name;  
              }
-	     Storage::put('data2.txt',$data);
-	     $result=array();
-	     $result["ok"]="ok";
-             return json_encode($result);
+            $emergencia=new Emergencia;
+            $emergencia->descripcion=$description;
+            $emergencia->fecha=Carbon::Now();
+            $emergencia->id_municipio=$cityId;
+            $emergencia->tipo_emergencia=$emergency_type;
+            $emergencia->localizacion=$geolocation;
+            $user=User::where("email","=",$email)->first();
+            $emergencia->user_id=$user->id;
+            $emergencia->estado="Registrado";
+            $emergencia->movil=1;
+            $emergencia->save();
+            $result=array();
+	        $result["ok"]="ok";
+                 return json_encode($result);
         }
 }
