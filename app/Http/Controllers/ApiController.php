@@ -61,7 +61,7 @@ class ApiController extends Controller
             $emergencia->estado="Registrado";
             $emergencia->movil=1;
             $emergencia->fotos=json_encode($fotos);
-            $emergencia->video=json_encode($video);
+            $emergencia->video=json_encode($videos);
             $emergencia->save();
             $result=array();
 	        $result["ok"]="ok";
