@@ -35,7 +35,7 @@ class ApiController extends Controller
                 {
                     
                     $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).time().'.'.$file->extension();
-                    $path=$public_path().'/storage/files/';
+                    $path=public_path().'/storage/files/';
                     $fotos[]="files\/".$name;
                     $file->move($path, $name);  
                     $data[] = $name;  
@@ -45,7 +45,7 @@ class ApiController extends Controller
              {
                     $file=$request->file("video");
                     $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).time().'.'.$file->extension();
-                    $path=$public_path().'/storage/files/';
+                    $path=public_path().'/storage/files/';
                     $videos[]="files\/".$name;
                     $file->move($path, $name);  
                     $data[] = $name;  
