@@ -25,7 +25,9 @@ class ApiController extends Controller
     {
             extract($request->input());
             //    return $request;
-	        $data=Array();
+            $data=Array();
+            $videos=Array();
+            $fotos=Array();
             if($request->hasfile('photos'))
              {
                 $x="";
@@ -33,9 +35,9 @@ class ApiController extends Controller
                 {
                     
                     $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).time().'.'.$file->extension();
-    
-                    $file->move(public_path().'/files/', $name);  
-
+                    $path=$public_path().'/storage/files/';
+                    $fotos[]="files\/".$name;
+                    $file->move($path, $name);  
                     $data[] = $name;  
                 }
              }
@@ -43,7 +45,9 @@ class ApiController extends Controller
              {
                     $file=$request->file("video");
                     $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).time().'.'.$file->extension();
-                    $file->move(public_path().'/files/', $name);  
+                    $path=$public_path().'/storage/files/';
+                    $videos[]="files\/".$name;
+                    $file->move($path, $name);  
                     $data[] = $name;  
              }
             $emergencia=new Emergencia;
@@ -56,6 +60,8 @@ class ApiController extends Controller
             $emergencia->user_id=$user->id;
             $emergencia->estado="Registrado";
             $emergencia->movil=1;
+            $emergencia->fotos=json_encode($fotos);
+            $emergencia->video=json_encode($video);
             $emergencia->save();
             $result=array();
 	        $result["ok"]="ok";
