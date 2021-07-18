@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Municipio2;
 use App\Models\TiposEmergencia;
+use App\Models\Emergencia;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Carbon;
+
 class ApiController extends Controller
 {
     //
@@ -19,9 +23,18 @@ class ApiController extends Controller
     }
     public function postemergencia(Request $request)
     {
-            Storage::put('data.txt',$request->input());
+            extract($request->input());
             //    return $request;
-	   $data=Array();
+	        $data=Array();
+            $emergencia=new Emergencia;
+            $emergencia->descripcion=$description;
+            $emergencia->fecha=Carbon::Now();
+            $emergencia->id_municipio=$cityId;
+            $emergencia->tipo_emergencia=$emergency_type;
+            $emergencia->localizacion=$geolocation;
+            $user=User::where("email","=",$email)->first();
+            $emergencia->user_id=$user->id;
+            $emergencia->save();
             if($request->hasfile('photos'))
              {
                 $x="";
