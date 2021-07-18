@@ -19,8 +19,9 @@ class ApiController extends Controller
     }
     public function postemergencia(Request $request)
     {
-            Storage::put('data.txt',$request->getContent());
+            Storage::put('data.txt',$request->input());
             //    return $request;
+	   $data=Array();
             if($request->hasfile('photos'))
              {
                 $x="";
@@ -41,7 +42,9 @@ class ApiController extends Controller
                     $file->move(public_path().'/files/', $name);  
                     $data[] = $name;  
              }
-
-             return "ok";
+	     Storage::put('data2.txt',$data);
+	     $result=array();
+	     $result["ok"]="ok";
+             return json_encode($result);
         }
 }
