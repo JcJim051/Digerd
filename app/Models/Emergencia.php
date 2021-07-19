@@ -68,17 +68,17 @@ class Emergencia extends Model
 
 	public function municipio()
 	{
-		return $this->belongsTo(Municipio::class, 'id_municipio');
+		return $this->belongsTo(Municipio::class, 'id_municipio')->withDefault();;
 	}
 
 	public function entidad()
 	{
-		return $this->belongsTo(Entidad::class, 'id_entidad');
+		return $this->belongsTo(Entidad::class, 'id_entidad')->withDefault();;
 	}
 
 	public function funcionario()
 	{
-		return $this->belongsTo(Funcionario::class, 'id_funcionario');
+		return $this->belongsTo(Funcionario::class, 'id_funcionario')->withDefault();;
 	}
 
 	public function medios()
