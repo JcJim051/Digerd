@@ -15,7 +15,11 @@ $add = is_null($dataTypeContent->getKey());
 <h1 class="page-title">
     <i class="{{ $dataType->icon }}"></i>
     {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular') }}
+    <a href="{{route('exportemergencia',$dataTypeContent->id_emergencia)}}" title="DOCX" class="btn btn-sm btn-success pull-right" target="blank">
+            <i class="fa fa-file-docx-o"></i> <span class="hidden-xs hidden-sm">DOCX</span>
+        </a>
 </h1>
+
 @include('voyager::multilingual.language-selector')
 @stop
 
@@ -132,7 +136,13 @@ $add = is_null($dataTypeContent->getKey());
                                             Fecha
                                             </th>
                                             <th>
-                                            Personas Involucradas
+                                            Hombres
+                                            </th>
+                                            <th>
+                                            Mujeres
+                                            </th>
+                                            <th>
+                                            Niños
                                             </th>
 
                                         </tr>
@@ -150,7 +160,13 @@ $add = is_null($dataTypeContent->getKey());
                                             <p>{{$d->fecha}}</p>
                                             </td>
                                             <td>
-                                            <p>{{$d->personas_involucradas}}</p>
+                                            <p>{{$d->hombres}}</p>
+                                            </td>
+                                            <td>
+                                            <p>{{$d->mujeres}}</p>
+                                            </td>
+                                            <td>
+                                            <p>{{$d->ninos}}</p>
                                             </td>
 
                                         </tr>
@@ -184,9 +200,18 @@ $add = is_null($dataTypeContent->getKey());
                                 <input type="date"  class="form-control" id="fecha" name="fecha" placeholder="fecha">
                                 </div>
                                 <div class="form-group  col-md-12 ">
-                                    <label class="control-label" for="personas">Personas involucradas</label>
-                                <input type="number" min="0"  class="form-control" id="personas" name="personas" placeholder="Cantidad de personas" value="1">
+                                    <label class="control-label" for="hombres">Hombres</label>
+                                <input type="number" min="0"  class="form-control" id="hombres" name="hombres" placeholder="Cantidad de hombres" value="0">
                                 </div>
+                                <div class="form-group  col-md-12 ">
+                                    <label class="control-label" for="mujeres">Mujeres</label>
+                                <input type="number" min="0"  class="form-control" id="mujeres" name="mujeres" placeholder="Cantidad de mujeres" value="0">
+                                </div>
+                                <div class="form-group  col-md-12 ">
+                                    <label class="control-label" for="ninos">Niños</label>
+                                <input type="number" min="0"  class="form-control" id="ninos" name="ninos" placeholder="Cantidad de Niños" value="0">
+                                </div>
+
                                 <input type="hidden" name="id_emergencia" value="{{$dataTypeContent->id_emergencia}}">
                                 @csrf
                                 <button type="submit" class="btn btn-primary save">Agregar</button>
@@ -222,7 +247,7 @@ $add = is_null($dataTypeContent->getKey());
                                             <p>{{$d->descripcion}}</p>
                                             </td>
                                             <td>
-                                            <p>{{$d->valor}}</p>
+                                            <p>$ {{number_format($d->valor,0,'','.')}}</p>
                                             </td>
                                             <td>
                                             <p>{{$d->fecha}}</p>

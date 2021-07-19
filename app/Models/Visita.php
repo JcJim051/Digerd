@@ -58,4 +58,8 @@ class Visita extends Model
 		return $this->belongsToMany(Emergencia::class, 'visita_emergencia', 'id_visita', 'id_emergencia')
 					->withPivot('id_visita_emergencia');
 	}
+	public function municipio()
+	{
+		return $this->belongsTo(Municipio::class,"id_municipio","id_municipio");
+	}
 }

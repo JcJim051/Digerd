@@ -32,6 +32,8 @@ Route::get('/exportemergencia/{id}', 'App\Http\Controllers\ExportController@expo
 Route::get('/exportinforme/{id}', 'App\Http\Controllers\ExportController@exportinforme')->name('exportinforme');
 Route::get('/exportproyecto/{id}', 'App\Http\Controllers\ExportController@exportproyecto')->name('exportproyecto');
 Route::get('/exportactareunion/{id}', 'App\Http\Controllers\ExportController@exportactareunion')->name('exportactareunion');
+Route::get('/exportvisita/{id}', 'App\Http\Controllers\ExportController@exportvisita')->name('exportvisita');
+
 Route::resource('reportes', 'App\Http\Controllers\ReportController');
 Route::get('reportes', 'App\Http\Controllers\ReportController@index')->name('reportes');
 Route::post('reportes.parameters', 'App\Http\Controllers\ReportController@parameters')->name('parameters');

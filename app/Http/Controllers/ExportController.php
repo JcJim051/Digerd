@@ -15,6 +15,7 @@ use App\Models\Actividad;
 use App\Models\ActasReunion;
 use App\Models\Emergencia;
 use App\Models\Proyecto;
+use App\Models\Visita;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 class ExportController extends Controller
@@ -22,9 +23,14 @@ class ExportController extends Controller
     //
     public function exportxlsx($table)
     {
-        //$datatype=DataType::find($table);
+        $datatype=DataType::find($table);
        // dd($datatype->editRows);
-        return Excel::download(new ExcelExporter($table,"/images/logob.png"),"download.xlsx");
+       $n=$datatype->getTranslatedAttribute('display_name_plural');
+
+       $date=new Carbon();
+
+       $name=$n.$date->format('YmdHi').".xlsx";
+        return Excel::download(new ExcelExporter($table,"/images/logob.png"),$name);
     }
     public function exportemergencia($id)
     {
@@ -107,18 +113,14 @@ class ExportController extends Controller
         $acta=ActasReunion::find($id);
         $acta_array=$acta->toArray();
        
-        $asistentes=explode("\r\n",$acta->asistentes);
-        $datatable=array();
-        foreach($asistentes as $asistente)
-        {
-            $datatable[]=array("nombre"=>$asistente);
-        }
-       
-           $x=DocumentUtil::generateWithTable(
+        $asistentes=json_decode($acta->asistentes);
+        //$datatable=array();
+     
+           $x=DocumentUtil::generateWithTableJSON(
                 public_path('formatos/acta_reunion.docx'),
                 $acta_array,
                 "nombre",
-                $datatable,
+                $asistentes,
                 false  // optional
             );
             $date=new Carbon();
@@ -126,6 +128,27 @@ class ExportController extends Controller
             return response()->download($x, 'acta'.$date->format('YmdHi').'.docx', []);
         
     }
+    public function exportvisita($id)
+    {
+        $visita=Visita::find($id);
+        $visita_array=$visita->toArray();
+        $visita_array["municipio"]=$visita->municipio->nombre;
+        $asistentes=json_decode($visita->asistentes);
+        //$datatable=array();
+     
+           $x=DocumentUtil::generateWithTableJSON(
+                public_path('formatos/acta_visita.docx'),
+                $visita_array,
+                "nombre",
+                $asistentes,
+                false  // optional
+            );
+            $date=new Carbon();
+            
+            return response()->download($x, 'acta_visita'.$date->format('YmdHi').'.docx', []);
+        
+    }
+
     public function exportproyecto($id)
     {
         $proyecto=Proyecto::find($id);

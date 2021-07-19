@@ -88,7 +88,7 @@ class Emergencia extends Model
 
 	public function inversion()
 	{
-		return $this->hasOne(Inversion::class, 'id_inversion');
+		return $this->hasMany(Inversion::class, 'id_inversion','id_inversion');
 	}
 
 	public function emergencias_acta()
