@@ -42,13 +42,13 @@
                         Tipo de Ayuda
                       </th>
                       <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Cantidad">
-                       Cantidad Disponible
-                      </th>
-                      <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Cantidad">
                        Total Entradas
                       </th>
                       <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Cantidad">
                        Total Salidas
+                      </th>
+                      <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Cantidad">
+                       Cantidad Disponible
                       </th>
                       
 
@@ -63,13 +63,13 @@
                         <div>{{$d->descripcion}}</div>
                       </td>
                       <td>
-                        <div>{{$d->disponible}}</div>
-                      </td>
-                      <td>
                         <div>{{$d->entrada}}</div>
                       </td>
                       <td>
                         <div>{{$d->salida}}</div>
+                      </td>
+                      <td>
+                        <div>{{$d->disponible}}</div>
                       </td>
                      
                      </tr>

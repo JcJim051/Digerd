@@ -50,7 +50,10 @@ class EmergenciaController extends VoyagerBaseController
         $accion->id_entidad=$entidad;
         $accion->id_emergencia=$id_emergencia;
         $accion->id_tipo_actividad=$tipoactividad;
-        $accion->personas_involucradas=$personas;
+        $accion->hombres=$hombres;
+        $accion->mujeres=$mujeres;
+        $accion->ninos=$ninos;
+        
         $accion->fecha=$fecha;
         $accion->save();
         return back()->withInput();

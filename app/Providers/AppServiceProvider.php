@@ -11,6 +11,7 @@ use App\HtmlFormField;
 use App\ListSelectFormField;
 use App\CascadeFormField;
 use App\CurrencyFormField;
+use App\MultiFormField;
 use App\Actions\PrintAction;
 use App\Actions\DocxAction;
 
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Voyager::addFormField(HtmlFormField::class);
         Voyager::addFormField(CascadeFormField::class);
         Voyager::addFormField(CurrencyFormField::class);
+        Voyager::addFormField(MultiFormField::class);
     }
 
     /**
