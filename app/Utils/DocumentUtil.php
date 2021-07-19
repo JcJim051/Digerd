@@ -90,6 +90,11 @@ if (isset($emergencia->fotos))
             }
         }
     }
+    else
+    {
+        $phpWord->cloneBlock('fotos', 0, true, true);
+
+    }
         $fnDOwnload = "filegenerated_".date('YmdHis').rand(0,1000);
 
         $finalDocPath = base_path() . "/public/$fnDOwnload.docx";
