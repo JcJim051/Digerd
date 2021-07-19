@@ -74,6 +74,8 @@ class DocumentUtil
         $actividades=Generic::Hydrate($result)->toArray();;
         $phpWord->cloneRowAndSetValues('actividad', $actividades);
 
+if (isset($emergencia->fotos))
+        {
         $arr=json_decode($emergencia->fotos);
         //dd($arr);
         //dd(public_path()."/storage/".$arr[0]);
@@ -87,6 +89,7 @@ class DocumentUtil
                 $i++;
             }
         }
+    }
         $fnDOwnload = "filegenerated_".date('YmdHis').rand(0,1000);
 
         $finalDocPath = base_path() . "/public/$fnDOwnload.docx";
