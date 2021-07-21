@@ -25,6 +25,15 @@
 
     </div>
     <div class="panel">
+    <div class="form-group">
+    
+    <select class="form-control" id="location" name="location" onChange="change();">
+    <option value="">Seleccione el municipio</option>
+    @foreach ($municipios as $municipio)
+      <option value={{$municipio->localizacion}}>{{$municipio->nombre}}</option>
+    @endforeach
+    </select>
+    </div>
         <div id="exTab2">
             <ul class="nav nav-tabs">
                 <li class="active">
@@ -178,5 +187,14 @@ var LeafIcon = L.Icon.extend({
         };
 
         var heat = L.heatLayer(points).addTo(map2);
+
+        function change()
+        {
+            const str=document.getElementById("location").value;
+            const arr=str.split(",");    
+            map.panTo(new L.LatLng(parseFloat(arr[0]),parseFloat(arr[1])));
+            map2.panTo(new L.LatLng(parseFloat(arr[0]),parseFloat(arr[1])));
+
+        }
     </script>
     @stop
