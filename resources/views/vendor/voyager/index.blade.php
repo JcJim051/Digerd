@@ -32,8 +32,10 @@
                 </li>
                 <li><a href="#2" data-toggle="tab">Mapa de Calor</a>
                 </li>
+                @if (auth()->user()->hasRole('funcionario'))
                 <li><a href="#3" data-toggle="tab">Actividades <font color="#cc0000">({{count($actividades)}})</font></a>
                 </li>
+                @endif
             </ul>
             <div class="tab-content ">
                 <div class="tab-pane active" id="1">

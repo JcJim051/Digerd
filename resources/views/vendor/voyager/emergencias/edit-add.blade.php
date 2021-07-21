@@ -15,9 +15,11 @@ $add = is_null($dataTypeContent->getKey());
 <h1 class="page-title">
     <i class="{{ $dataType->icon }}"></i>
     {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular') }}
+   @if ($edit)
     <a href="{{route('exportemergencia',$dataTypeContent->id_emergencia)}}" title="DOCX" class="btn btn-sm btn-success pull-right" target="blank">
             <i class="fa fa-file-docx-o"></i> <span class="hidden-xs hidden-sm">DOCX</span>
         </a>
+    @endif    
 </h1>
 
 @include('voyager::multilingual.language-selector')

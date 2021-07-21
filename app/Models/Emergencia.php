@@ -8,7 +8,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 /**
  * Class Emergencia
  *
@@ -60,7 +61,16 @@ class Emergencia extends Model
 		'id_entidad',
 		'id_funcionario'
 	];
-
+	protected static function boot()
+    {
+			parent::boot();
+			if (Auth::check())
+				if (auth()->user()->hasRole('municipio') ) {
+				static::addGlobalScope('municipio', function (Builder $builder) {
+						$builder->where('id_municipio', '=', auth()->user()->id_municipio);
+				});
+		}
+    }
 	public function tipos_emergencia()
 	{
 		return $this->belongsTo(TiposEmergencia::class, 'tipo_emergencia');
