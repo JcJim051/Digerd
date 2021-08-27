@@ -87,7 +87,10 @@
                                         @include('voyager::formfields.relationship', ['options' => $row->details])
                                     @elseif (($row->field == 'aprobado'))
                                     @php
-                                     $incompletas=\App\Utils\ValidarActividades::validar($dataTypeContent->id_informe);
+                                     if (isset($dataTypeContent->id_informe))
+                                      $incompletas=\App\Utils\ValidarActividades::validar($dataTypeContent->id_informe);
+                                     else
+                                      $incompletas=0;
                                     @endphp
                                         @if ($incompletas>0)
                                          <p><font color="#cc0000"> No es posible aprobar el informe, el funcionario tiene {{$incompletas}} actividad(es) pendientes.
