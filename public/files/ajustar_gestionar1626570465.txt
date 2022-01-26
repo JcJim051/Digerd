@@ -1,0 +1,13 @@
+textarea
+agregar plantillas xlsx
+notificaciones
+Indicadores - 
+Pagina - 
+
+
+Ciclos - Diagnostico inicial 
+Plan de trabajo
+Matriz de Riesgos
+Aplicacion de bateria
+Generador de formatos
+
