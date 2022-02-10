@@ -36,7 +36,7 @@ class ApiController extends Controller
                     
                     $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).time().'.'.$file->extension();
                     $path=public_path().'/storage/files/';
-                    $fotos[]="files\/".$name;
+                    $fotos[]="files/".$name;
                     $file->move($path, $name);  
                     $data[] = $name;  
                 }
