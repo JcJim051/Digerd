@@ -45,6 +45,8 @@ Route::post('/addaccion','App\Http\Controllers\EmergenciaController@addaccion')-
 Route::post('/addinversion','App\Http\Controllers\EmergenciaController@addinversion')->name('addinversion');
 Route::post('/addpersona','App\Http\Controllers\EmergenciaController@addpersona')->name('addpersona');
 
+Route::resource('respuestaPQRSD', 'App\Http\Controllers\Pqrsd\RespuestaController');
+
 Route::get('/disponibilidad','App\Http\Controllers\InventarioController@disponibilidad')->name('disponibilidad');
 Route::get('/generateTest', function () {
 
