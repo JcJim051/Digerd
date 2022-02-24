@@ -21,9 +21,9 @@
                                 <th class="text-center">Nombre del Remitente</th>
                                 <th class="text-center">Asunto</th>
                                 <th class="text-center">Tipo</th>
-                                <th class="text-center">Fecha Creación</th>
                                 <th class="text-center">Fecha Asignación</th>
                                 <th class="text-center">Soporte</th>
+                                <th class="text-center">Plazo</th>
                                 <th class="text-center">Acciones</th> 
                             </tr>
                         </thead>
@@ -38,13 +38,16 @@
                                 <td class="text-center">{{ $pqrsd->nombre_remitente }}</td>
                                 <td class="text-center">{{ $pqrsd->asunto }}</td>
                                 <td class="text-center">{{ $pqrsd->tipo }}</td>
-                                <td class="text-center">{{ $pqrsd->fecha_creacion }}</td>
                                 <td class="text-center">{{ $pqrsd->fecha_asignacion }}</td>
                                 <td class="text-center">
                                     <a href="{{ Storage::disk(config('voyager.storage.disk'))->url(json_decode($pqrsd->soporte_solicitud)['0']->download_link) ?: '' }}" title="Soporte" target="_blank" class="btn btn-sm btn-warning pull-right view">  
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Soporte</span>
                                     </a>
                                 </td>
+                                @php
+                                    $d = explode(" ",$pqrsd->plazo);
+                                @endphp
+                                <td class="text-center">{{ intval($d[0])>15? "Vencido": ($pqrsd->soporte_respuesta == "[]"? ($d[0] == '1'? $d[0]." día":$d[0]." días"):"-") }}</td>
                                 <td class="text-center">
                                     @if ($pqrsd->soporte_respuesta != "[]")
                                         <button type="button" class="btn btn-success">Finalizado</button>

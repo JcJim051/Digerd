@@ -22,9 +22,8 @@ class RespuestaController extends Controller
         $pqrsds = DB::table('users')
         ->join('funcionarios', 'users.id_funcionario', '=', 'funcionarios.id_funcionario')
         ->join('pqrsd', 'pqrsd.responsable', '=', 'funcionarios.id_funcionario')
-        ->select('users.*', 'funcionarios.*', 'pqrsd.*')
+        ->select('users.*', 'funcionarios.*', 'pqrsd.*', DB::raw("age(cast(now() as date), cast(pqrsd.fecha_asignacion as date))  as plazo") )
         ->where('users.id', $sesion->id)
-        // ->whereNull('nomina_id')
         ->get();
         // dd($pqrsds);
         return view('pqrsd.index', compact('pqrsds'));
@@ -85,14 +84,18 @@ class RespuestaController extends Controller
     {        
         $pqrsd = Pqrsd::find($id);
         $filename = "";
+        $archivo = "";
+
         if($archivo = $request->file('fileSoporteRespuesta')){
             $destinoXls = 'pqrsds/' . date('FY') . '/';
             $profile  = time() . '.' . $archivo->getClientOriginalExtension();
             $filename = $destinoXls . $profile ;
             $archivo->move('storage/' . $destinoXls, $profile);
+            $archivo = '[{"download_link":"' . $filename . '","original_name":"' . $archivo->getClientOriginalName() . '"}]';
         };
         $pqrsd->num_radicado        = $request->numeroRadicado;
-        $pqrsd->soporte_respuesta   =  $request->$filename;
+        $pqrsd->soporte_respuesta   = $archivo;
+        $pqrsd->estado              = 2;
         $pqrsd->save();
         $notification = array(
             'message' => 'PQRSD Finalizado exitosamente!',
