@@ -17,7 +17,7 @@ $add = is_null($dataTypeContent->getKey());
     {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->getTranslatedAttribute('display_name_singular') }}
    @if ($edit)
     <a href="{{route('exportemergencia',$dataTypeContent->id_emergencia)}}" title="DOCX" class="btn btn-sm btn-success pull-right" target="blank">
-            <i class="fa fa-file-docx-o"></i> <span class="hidden-xs hidden-sm">DOCX</span>
+        <i class="fa fa-file-word-o" aria-hidden="true"></i><span class="hidden-xs hidden-sm"> Exportar</span>
         </a>
     @endif    
 </h1>

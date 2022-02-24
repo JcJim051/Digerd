@@ -12,7 +12,8 @@
             @show
             
             <ol class="breadcrumb " class="navbar-header">
-            <img src="{{asset('images/logob.png')}}">                
+            
+            <img src="{{asset('images/logob.png')}}" height="45px">                
             </ol>
         
         </div>
