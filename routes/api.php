@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SendEmailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,4 @@ Route::get("/obligaciones/{id}",function ($id) {
     $opciones=Illuminate\Support\Facades\DB::table("obligaciones")->where("id_funcionario","=",$id)->get();
     return $opciones;
 })->name('apiobligaciones');
+Route::post('/asignacion', [SendEmailController::class, 'responsable'])->name('asignacion');
