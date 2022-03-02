@@ -241,7 +241,7 @@ $add = is_null($dataTypeContent->getKey());
     $('.save').on('click', function(tag) {
         tag.preventDefault();
         tag.stopPropagation();
-        var url = 'http://127.0.0.1:8000/api/asignacion';
+        var url = 'https://sos.meta.gov.co/api/asignacion';
         var table = '{{ $dataType->slug }}';
         var formData = $('.form-edit-add').serializeObject();
         delete formData['_method'];
