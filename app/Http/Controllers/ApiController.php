@@ -59,6 +59,7 @@ class ApiController extends Controller
             $emergencia->tipo_emergencia=$emergency_type;
             $emergencia->localizacion=$geolocation;
             $user=User::where("email","=",$email)->first();
+            $emergencia->id_funcionario=$user->id_funcionario;
             $emergencia->user_id=$user->id;
             $emergencia->estado="Registrado";
             $emergencia->movil=1;
