@@ -25,7 +25,7 @@ class RespuestaController extends Controller
         $pqrsds = DB::table('users')
             ->join('funcionarios', 'users.id_funcionario', '=', 'funcionarios.id_funcionario')
             ->join('pqrsd', 'pqrsd.responsable', '=', 'funcionarios.id_funcionario')
-            ->select('users.*', 'funcionarios.*', 'pqrsd.*', DB::raw(" EXTRACT(DAY FROM (pqrsd.fecha_asignacion + INTERVAL '0 days' - now())) as plazo"), DB::raw('now()'))
+            ->select('users.*', 'funcionarios.*', 'pqrsd.*', DB::raw(" EXTRACT(DAY FROM (pqrsd.fecha_asignacion + INTERVAL '10 days' - now())) as plazo"), DB::raw('now()'))
             //->select('users.*', 'funcionarios.*', 'pqrsd.*', DB::raw("age(cast(now() as date), cast(pqrsd.fecha_asignacion as date))  as plazo"))
             ->where('users.id', $sesion->id)
             ->get();
