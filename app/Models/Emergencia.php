@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+
 /**
  * Class Emergencia
  *
@@ -42,88 +43,97 @@ use Illuminate\Support\Facades\Auth;
  */
 class Emergencia extends Model
 {
-	protected $table = 'emergencias';
-	protected $primaryKey = 'id_emergencia';
-	public $timestamps = false;
+    protected $table = 'emergencias';
+    protected $primaryKey = 'id_emergencia';
+    public $timestamps = false;
 
 
 
-	protected $fillable = [
-		'descripcion',
-		'localizacion',
-		'fecha',
-		'estado',
-		'tipo_emergencia',
-		'id_municipio',
-		'comuna',
-		'fuente_agua',
-		'movil',
-		'id_entidad',
-		'id_funcionario'
-	];
-	protected static function boot()
+    protected $fillable = [
+        'descripcion',
+        'localizacion',
+        'fecha',
+        'estado',
+        'tipo_emergencia',
+        'id_municipio',
+        'comuna',
+        'fuente_agua',
+        'movil',
+        'id_entidad',
+        'id_funcionario'
+    ];
+    protected static function boot()
     {
-			parent::boot();
-			if (Auth::check())
-				if (auth()->user()->hasRole('municipio') ) {
-				static::addGlobalScope('municipio', function (Builder $builder) {
-						$builder->where('id_municipio', '=', auth()->user()->id_municipio);
-				});
-		}
+        parent::boot();
+        if (Auth::check()) {
+            if (auth()->user()->hasRole('municipio')) {
+                static::addGlobalScope('municipio', function (Builder $builder) {
+                    $builder->where('id_municipio', '=', auth()->user()->id_municipio);
+                });
+            }
+            if (auth()->user()->hasRole('CMGRD')) {
+                static::addGlobalScope('cmgrd', function (Builder $builder) {
+                    $builder->where('id_municipio', '=', auth()->user()->id_municipio);
+                });
+            }
+        }
     }
-	public function tipos_emergencia()
-	{
-		return $this->belongsTo(TiposEmergencia::class, 'tipo_emergencia');
-	}
+    public function tipos_emergencia()
+    {
+        return $this->belongsTo(TiposEmergencia::class, 'tipo_emergencia');
+    }
 
-	public function municipio()
-	{
-		return $this->belongsTo(Municipio::class, 'id_municipio')->withDefault();;
-	}
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'id_municipio')->withDefault();
+        ;
+    }
 
-	public function entidad()
-	{
-		return $this->belongsTo(Entidad::class, 'id_entidad')->withDefault();;
-	}
+    public function entidad()
+    {
+        return $this->belongsTo(Entidad::class, 'id_entidad')->withDefault();
+        ;
+    }
 
-	public function funcionario()
-	{
-		return $this->belongsTo(Funcionario::class, 'id_funcionario')->withDefault();;
-	}
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class, 'id_funcionario')->withDefault();
+        ;
+    }
 
-	public function medios()
-	{
-		return $this->hasMany(Medio::class, 'id_emergencia');
-	}
+    public function medios()
+    {
+        return $this->hasMany(Medio::class, 'id_emergencia');
+    }
 
-	public function inversion()
-	{
-		return $this->hasMany(Inversion::class, 'id_inversion','id_inversion');
-	}
+    public function inversion()
+    {
+        return $this->hasMany(Inversion::class, 'id_inversion', 'id_inversion');
+    }
 
-	public function emergencias_acta()
-	{
-		return $this->hasOne(EmergenciasActa::class, 'id_emergencia');
-	}
+    public function emergencias_acta()
+    {
+        return $this->hasOne(EmergenciasActa::class, 'id_emergencia');
+    }
 
-	public function personas_afectadas()
-	{
-		return $this->hasMany(PersonasAfectada::class, 'id_emergencia');
-	}
+    public function personas_afectadas()
+    {
+        return $this->hasMany(PersonasAfectada::class, 'id_emergencia');
+    }
 
-	public function inventario_salidas()
-	{
-		return $this->hasMany(InventarioSalida::class, 'id_emergencia');
-	}
+    public function inventario_salidas()
+    {
+        return $this->hasMany(InventarioSalida::class, 'id_emergencia');
+    }
 
-	public function acciones_adelantadas()
-	{
-		return $this->hasMany(AccionesAdelantada::class, 'id_emergencia');
-	}
+    public function acciones_adelantadas()
+    {
+        return $this->hasMany(AccionesAdelantada::class, 'id_emergencia');
+    }
 
-	public function visitas()
-	{
-		return $this->belongsToMany(Visita::class, 'visita_emergencia', 'id_emergencia', 'id_visita')
-					->withPivot('id_visita_emergencia');
-	}
+    public function visitas()
+    {
+        return $this->belongsToMany(Visita::class, 'visita_emergencia', 'id_emergencia', 'id_visita')
+                    ->withPivot('id_visita_emergencia');
+    }
 }
