@@ -40,7 +40,7 @@ class DocumentUtil
         $data["municipio"] = $emergencia->municipio->nombre;
         $data["id_emergencia"] = $emergencia->id_emergencia;
         $data["localizacion"] = "https://maps.google.com/?q=" . $emergencia->localizacion;
-        $data["tipo"] = !isset($emergencia->tipos_emergencia->descripcion)?$emergencia->tipos_emergencia->descripcion:null;
+        $data["tipo"] = isset($emergencia->tipos_emergencia->descripcion)?$emergencia->tipos_emergencia->descripcion:null;
         $data["entidad"] = $emergencia->entidad->nombre;
         $data["criticidad"] = $emergencia->criticidad;
         $data["comuna"] = $emergencia->comuna;
