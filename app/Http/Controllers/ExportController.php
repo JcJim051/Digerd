@@ -132,7 +132,7 @@ class ExportController extends Controller
     {
         $visita=Visita::find($id);
         $visita_array=$visita->toArray();
-        $visita_array["municipio"]=$visita->municipio->nombre;
+        $visita_array["municipio"]=isset($visita->municipio->nombre)?$visita->municipio->nombre:'';
         $asistentes=json_decode($visita->asistentes);
         //$datatable=array();
      
